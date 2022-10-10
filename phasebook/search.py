@@ -27,4 +27,19 @@ def search_users(args):
 
     # Implement search here!
 
-    return USERS
+    if len(args) == 0:
+        return USERS
+    
+    result = []
+    for query in args:
+        for user in USERS:
+            if user not in result:
+                if query == "id" and user[query] == args[query]:
+                    result.append(user)
+                elif query == "name" and args[query].lower() in user[query].lower():
+                    result.append(user)
+                elif query == "age" and user[query] >= int(args[query]) - 1 and user[query] <= int(args[query]) + 1:
+                    result.append(user)
+                elif query == "occupation" and args[query].lower() in user[query].lower():
+                    result.append(user)
+    return result
